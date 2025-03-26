@@ -1,10 +1,11 @@
 <template>
   <div class="btn-container">
-    <button type="button">Add new questions</button>
+    <button type="button" class="button primary" @click="showPopup">Add new questions</button>
   </div>
-  <h1>{{ msg }}</h1>
+  <AddNewPopup v-if="isPopupVisible" @close="isPopupVisible = false"/>
+
   <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
+    <button type="button" @click="count++" class="button primary">count is {{ count }}</button>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
@@ -28,29 +29,28 @@
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p> -->
 </template>
 
-<!-- <script setup>
-import { ref } from 'vue'
-
-defineProps({
-  msg: String,
-})
-
-const count = ref(0)
-
-</script> -->
 
 <script>
+import AddNewPopup from '../components/AddNewPopup.vue';
+
+
 export default {
+  components: {AddNewPopup},
   data() {
     return {
-
-      msg: "Learning Agile",
+      titleMsg: "Learning Agile",
       count: 0,
+      isPopupVisible: false,
     };
   },
 
-    
-  };
+  methods: {
+    showPopup() {
+      this.isPopupVisible = !this.isPopupVisible
+    }
+  }
+
+};
 
 
 
@@ -59,21 +59,16 @@ export default {
 
 
 <style scoped>
-.read-the-docs {
-  color: #888;
-}
-
 .btn-container {
   display: flex;
   width: 80%;
-  margin: auto;
+  margin: 3rem auto;
   justify-content: end;
   align-items: center;
 }
 
-
-
-
-
-
+.card {
+  width: 50%;
+  margin: auto;
+}
 </style>

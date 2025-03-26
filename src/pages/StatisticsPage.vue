@@ -1,6 +1,8 @@
 <template>
-    <div>
-        Statistics page
+    <div class="statistics-body">
+        <h1>
+            Statistics page
+        </h1> 
     </div>
 
 
@@ -12,5 +14,13 @@
 </script>
 
 
-<style>
+<style scoped>
+
+.statistics-body {
+    display: flex;
+    justify-content: center;
+    padding: auto;
+    
+}
+
 </style>

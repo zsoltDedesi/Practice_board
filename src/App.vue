@@ -6,9 +6,9 @@
     </nav>
 
     <div v-if="isHome" class="nav-information">
-      <h1 class="title">Exercise: <span>{Topic title}</span></h1>
+      <h1 class="title">Practice progress</h1>
       <div class="progress-bar">
-        <div class="progress"></div>
+        <div class="progress" :style="progressStyle" ></div>
       </div>
     </div>
 
@@ -34,6 +34,7 @@
 <script>
 import MoonIcon from '@/assets/Dark_Icon.svg';
 import SunIcon from '@/assets/Light_Icon.svg';
+import { useCardStore } from './stores/card';
 
 export default {
   name: "App",
@@ -42,6 +43,9 @@ export default {
       theme: "light",
       isHome: false,
     };
+  },
+  created(){
+    this.cardStore = useCardStore();
   },
   mounted() {
     const saved = localStorage.getItem('theme');
@@ -67,6 +71,11 @@ export default {
     $route(to) {
       this.isHome = to.path === '/';
     }
+  },
+  computed: {
+    progressStyle() {
+      return {'--progress-width': `${this.cardStore.progressPercentage}%`}
+    }
   }
 };
 
@@ -74,6 +83,7 @@ export default {
 
 
 <style scoped>
+
 body {
   font-family: Arial, sans-serif;
   color-scheme: light dark;
@@ -163,7 +173,7 @@ body {
 
 .progress {
   height: 100%;
-  width: 30%; /* -> dynamically modified based on the content*/
+  width: var(--progress-width); /* -> dynamically modified based on the content*/
   background-color: var(--color-primary);
   transition: width 0.3s ease;
 }

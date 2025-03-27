@@ -15,7 +15,7 @@
       <div class="button-container">
         <button @click="closePopup" class="button secondary">Cancel</button>
         <button @click="validateJson" class="button secondary">Validate</button>
-        <button class="button primary">Create cards</button>
+        <button @click="createCardData" class="button primary">Create cards</button>
       </div>
     </div>
   </div>
@@ -29,6 +29,7 @@ import dedent from 'dedent';
 import { Codemirror } from 'vue-codemirror';
 import { json } from '@codemirror/lang-json'
 import { oneDark } from '@codemirror/theme-one-dark';
+import { useCardStore } from '../stores/card';
 
 export default {
   components: { Codemirror },
@@ -54,6 +55,16 @@ export default {
       . . . ,`),
     };
   },
+
+  created(){
+    this.cardStore = useCardStore();
+  },
+
+  mounted() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    this.theme = savedTheme;
+  },
+
   methods: {
     validateJson() {
       try {
@@ -76,29 +87,33 @@ export default {
       }
 
     },
-    saveData() {
+
+    createCardData() {
       if (this.dataIsValid !== true) {
         this.validateJson()
       }
       if (this.dataIsValid && this.tempData) {
-        this.$emit("save", { ...this.tempData });
+        if (Array.isArray(this.tempData)) {
+          this.tempData.forEach(card => this.cardStore.addCard(card))
+        } else {
+          this.cardStore.addCard(this.tempData)
+        }
+        this.$emit("create");
         this.$emit("close");
       }
     },
 
     closePopup() {
       this.$emit("close")
-    }
+    },
   },
+
   computed: {
     extensions() {
       return this.theme === 'dark' ? [json(), oneDark] : [json()]
     },
   },
-  mounted() {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    this.theme = savedTheme;
-  },
+
 };
 
 </script>

@@ -1,74 +1,97 @@
 <template>
   <div class="btn-container">
+    <button type="button" class="button primary" @click="resetQuestions">Reset questions</button>
     <button type="button" class="button primary" @click="showPopup">Add new questions</button>
   </div>
-  <AddNewPopup v-if="isPopupVisible" @close="isPopupVisible = false"/>
-
-  <div class="card">
-    <button type="button" @click="count++" class="button primary">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
+  <AddNewPopup v-if="isPopupVisible" @close="isPopupVisible = false" @create="cardIsVisible = true" />
+  <div class="quiz-container">
+    <div v-if="!cardIsVisible" class="welcome-text">
+      <p>
+        Place of welcome text
+      </p>
+    </div>
+    <div v-else class="card-container">
+      <QuestionCard 
+      v-for="(card, index) in cardStore.cards" 
+      :key="index" 
+      :card="card" 
+      :index="index"
+      class="card"/>
+    </div>
   </div>
-  <!-- 
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Learn more about IDE Support for Vue in the
-    <a
-      href="https://vuejs.org/guide/scaling-up/tooling.html#ide-support"
-      target="_blank"
-      >Vue Docs Scaling up Guide</a
-    >.
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p> -->
 </template>
 
 
 <script>
+import { useCardStore } from '../stores/card';
 import AddNewPopup from '../components/AddNewPopup.vue';
-
+import QuestionCard from '../components/QuestionCard.vue';
 
 export default {
-  components: {AddNewPopup},
+  components: { AddNewPopup, QuestionCard },
   data() {
     return {
       titleMsg: "Learning Agile",
-      count: 0,
+      cardIsVisible: false,
       isPopupVisible: false,
+      cardId: 1,
     };
+  },
+  created(){
+    this.cardStore = useCardStore();
   },
 
   methods: {
     showPopup() {
       this.isPopupVisible = !this.isPopupVisible
+    },
+
+    resetQuestions() {
+      this.cardStore.resetAll();
+      this.cardIsVisible = false;
+    }
+  },
+
+  computed: {
+    cards() {
+      return this.cardStore.cards;
     }
   }
 
 };
-
-
-
 </script>
 
 
-
 <style scoped>
+
+.welcome-text,
 .btn-container {
   display: flex;
   width: 80%;
   margin: 3rem auto;
-  justify-content: end;
   align-items: center;
 }
 
-.card {
-  width: 50%;
-  margin: auto;
+.btn-container {
+  justify-content: end;
+  gap: 24px;
+}
+
+
+.welcome-text {
+  color: var(--color-text-secondary);
+  text-align: center;
+  justify-content: center;
+  font-size: x-large;
+  font-weight: 600;
+}
+
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
 }
 </style>

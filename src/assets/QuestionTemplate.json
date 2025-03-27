@@ -1,0 +1,12 @@
+[
+  {
+    "question": "Question text",
+    "options": ["A", "B", "C", "D"],
+    "correctAnswer": "B"
+  },
+  {
+    "question": "Question text",
+    "options": ["A", "B", "C", "D"],
+    "correctAnswer": "C, A"
+  }
+]

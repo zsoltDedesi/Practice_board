@@ -168,8 +168,8 @@ button:focus-visible {
    ======================= */
 
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
   }
 
 ::-webkit-scrollbar-track {
@@ -178,7 +178,7 @@ button:focus-visible {
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-color);
-  border-radius: 4px;
+  border-radius: 5px;
   background-clip: content-box;
   border: 2px solid transparent;
 
@@ -191,6 +191,18 @@ button:focus-visible {
     margin: 0;
 }
 
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+main {
+  height: calc(100vh - 130px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-text-primary);
@@ -198,6 +210,7 @@ body {
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 
 .card {
   background-color: var(--color-surface);
@@ -222,7 +235,7 @@ h1, h2, h3 {
   font-weight: 500;
   font-size: 1rem;
   border: 1px solid transparent;
-  cursor: pointer;
+  /* cursor: pointer; */
   transition: all 0.2s ease;
 }
 

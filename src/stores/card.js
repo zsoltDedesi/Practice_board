@@ -27,6 +27,7 @@ export const useCardStore = defineStore("card", {
   },
 
   persist: {
+    enabled: true,
     storage: sessionStorage,
   },
 });

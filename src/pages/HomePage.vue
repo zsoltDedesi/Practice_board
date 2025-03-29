@@ -3,16 +3,16 @@
     <button type="button" class="button primary" @click="resetQuestions">Reset questions</button>
     <button type="button" class="button primary" @click="showPopup">Add new questions</button>
   </div>
-  <AddNewPopup v-if="isPopupVisible" @close="isPopupVisible = false" @create="cardIsVisible = true" />
+  <AddNewPopup v-if="isPopupVisible" @close="isPopupVisible = false"/>
   <div class="quiz-container">
-    <div v-if="!cardIsVisible" class="welcome-text">
+    <div v-if="cards.length === 0" class="welcome-text">
       <p>
         Place of welcome text
       </p>
     </div>
     <div v-else class="card-container">
       <QuestionCard 
-      v-for="(card, index) in cardStore.cards" 
+      v-for="(card, index) in cards" 
       :key="index" 
       :card="card" 
       :index="index"
@@ -23,6 +23,7 @@
 
 
 <script>
+import { useQuizStore } from '../stores/quiz';
 import { useCardStore } from '../stores/card';
 import AddNewPopup from '../components/AddNewPopup.vue';
 import QuestionCard from '../components/QuestionCard.vue';
@@ -32,13 +33,13 @@ export default {
   data() {
     return {
       titleMsg: "Learning Agile",
-      cardIsVisible: false,
       isPopupVisible: false,
       cardId: 1,
     };
   },
   created(){
-    this.cardStore = useCardStore();
+    this.quizStore = useQuizStore()
+    this.cardStore = useCardStore()
   },
 
   methods: {
@@ -47,8 +48,8 @@ export default {
     },
 
     resetQuestions() {
+      this.quizStore.resetAnswers();
       this.cardStore.resetAll();
-      this.cardIsVisible = false;
     }
   },
 
@@ -92,6 +93,6 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: 3rem;
 }
 </style>

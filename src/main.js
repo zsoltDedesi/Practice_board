@@ -4,13 +4,14 @@ import App from './App.vue'
 import router from './router'
 import './style.css'
 
-import { createPersistedState } from 'pinia-plugin-persistedstate'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+// import { createPersistedState } from 'pinia-plugin-persistedstate'
 // import { piniaPluginPersistedstate } from 'pinia-plugin-persistedstate'
 
 
 const app = createApp(App);
 const pinia = createPinia();
-pinia.use(createPersistedState)
+pinia.use(piniaPluginPersistedstate)
 
 app.use(router)
 app.use(pinia)

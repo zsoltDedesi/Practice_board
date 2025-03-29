@@ -2,7 +2,7 @@
     <button
       class="button"
       :class="{ selected: isSelected }"
-      @click="$emit('click')"
+      @click="$emit('select', label)"
     >
       {{ label }}
     </button>
@@ -13,15 +13,15 @@
     props: {
       label: String,
       isSelected: Boolean,
-      isCorrect: Boolean
-    }
-  }
+      // isCorrect: Boolean
+    },
+  };
 </script>
 
 <style scoped>
 
 button {
-    width: 45%;
+    width: 48%;
     height: 150px;
     font-weight: 600;
     font-size: large;

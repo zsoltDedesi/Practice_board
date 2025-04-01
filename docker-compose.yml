@@ -3,6 +3,7 @@ services:
     container_name: learning-board
     build:
       context: .
+    image: learning-board:latest
     ports:
       - "9080:3000"
     restart: unless-stopped

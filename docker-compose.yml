@@ -1,8 +1,13 @@
 version: "3.9"
 services:
   learning-board:
-    build: .
+    container_name: learning-board
+    build:
+      context: .
     ports:
       - "9080:3000"
-    container_name: learning-board
     restart: unless-stopped
+    labels:
+      io.casaos.name: "Learning Board"
+      io.casaos.description: "Tanulókártyás alkalmazás Vue + Vite alapon"
+      io.casaos.icon: "https://raw.githubusercontent.com/lucacasonato/casaos-appstore/main/Apps/Vaultwarden/icon.png"

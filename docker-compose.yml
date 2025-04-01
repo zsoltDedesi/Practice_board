@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  learning-board:
+    build: .
+    ports:
+      - "9080:3000"
+    container_name: learning-board
+    restart: unless-stopped

@@ -8,5 +8,14 @@ services:
     ports:
       - "9080:3000"
     restart: unless-stopped
-    labels:
-      icon: "https://raw.githubusercontent.com/lucacasonato/casaos-appstore/main/Apps/Vaultwarden/icon.png"
+
+x-casaos:
+  author: self
+  category: self
+  icon: "https://cdn-icons-png.flaticon.com/512/9240/9240330.png"
+  index: /
+  is_uncontrolled: false
+  port_map: "9080"
+  scheme: http
+  title:
+    custom: Learning Board

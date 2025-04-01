@@ -1,3 +1,4 @@
+name: learning-board
 services:
   learning-board:
     container_name: learning-board
@@ -8,6 +9,4 @@ services:
       - "9080:3000"
     restart: unless-stopped
     labels:
-      io.casaos.name: "Learning Board"
-      io.casaos.description: "Tanulókártyás alkalmazás Vue + Vite alapon"
-      io.casaos.icon: "https://raw.githubusercontent.com/lucacasonato/casaos-appstore/main/Apps/Vaultwarden/icon.png"
+      icon: "https://raw.githubusercontent.com/lucacasonato/casaos-appstore/main/Apps/Vaultwarden/icon.png"

@@ -44,7 +44,7 @@ export default {
       jsonInput: '',
       jsonError: null,
       placeholderText: dedent(`Json example for structure:
-      {
+      [{
         "question": 'question text',
         "options": ["True", "False", ...],
         "correctAnswer": "answer text"
@@ -52,7 +52,7 @@ export default {
       {
         . . .
       },
-      . . . ,`),
+      . . . ,]`),
     };
   },
 

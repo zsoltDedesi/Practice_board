@@ -1,7 +1,7 @@
 <template>
   <div class="btn-container">
-    <button type="button" class="button primary" @click="resetQuestions">Reset questions</button>
-    <button type="button" class="button primary" @click="showPopup">Add new questions</button>
+    <button type="button" class="button primary" @click="resetQuestions">Clear all questions</button>
+    <button type="button" class="button primary" @click="showPopup">Add questions</button>
   </div>
   <AddNewPopup v-if="isPopupVisible" @close="isPopupVisible = false" />
   <div>
@@ -33,6 +33,7 @@ import { useQuizStore } from '../stores/quiz';
 import { useCardStore } from '../stores/card';
 import AddNewPopup from '../components/AddNewPopup.vue';
 import QuestionCard from '../components/QuestionCard.vue';
+import { toast } from '../utils/toast';
 
 export default {
   components: { AddNewPopup, QuestionCard },
@@ -56,6 +57,7 @@ export default {
     resetQuestions() {
       this.quizStore.resetAnswers();
       this.cardStore.resetAll();
+      toast.success(`Your question list is now empty.`)
     }
   },
 

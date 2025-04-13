@@ -5,7 +5,7 @@
       <router-link to="/statistics" class="tab-link" exact-active-class="active">Statistics</router-link>
     </nav>
 
-    <div v-if="isHome" class="nav-information">
+    <div v-if="isHome && cards.length !== 0" class="nav-information">
       <h1 class="title">Practice progress</h1>
       <div class="progress-bar">
         <div class="progress" :style="progressStyle" ></div>
@@ -75,6 +75,9 @@ export default {
   computed: {
     progressStyle() {
       return {'--progress-width': `${this.cardStore.progressPercentage}%`}
+    },
+    cards() {
+      return this.cardStore.cards;
     }
   }
 };

@@ -14,7 +14,7 @@
       </div>
       <div class="button-container">
         <button @click="closePopup" class="button secondary">Cancel</button>
-        <button @click="validateJson" class="button secondary">Validate</button>
+        <!-- <button @click="validateJson" class="button secondary">Validate</button> -->
         <button @click="createCardData" class="button primary">Create cards</button>
       </div>
     </div>
@@ -30,6 +30,7 @@ import { Codemirror } from 'vue-codemirror';
 import { json } from '@codemirror/lang-json'
 import { oneDark } from '@codemirror/theme-one-dark';
 import { useCardStore } from '../stores/card';
+import { toast } from '../utils/toast';
 
 export default {
   components: { Codemirror },
@@ -42,7 +43,7 @@ export default {
       statusVisible: false,
       theme: "",
       jsonInput: '',
-      jsonError: null,
+      jsonMessage: null,
       placeholderText: dedent(`Json example for structure:
       [{
         "question": 'question text',
@@ -52,7 +53,7 @@ export default {
       {
         . . .
       },
-      . . . ,]`),
+      . . . ]`),
     };
   },
 
@@ -69,23 +70,24 @@ export default {
     validateJson() {
       try {
         if (!this.jsonInput.trim()) {
-          this.jsonError = `Input box is empty`
+          this.jsonMessage = `You haven’t added any questions yet.`
           this.dataIsValid = false;
+          toast.info(this.jsonMessage)
           return;
         }
 
         this.tempData = JSON.parse(this.jsonInput);
-        this.jsonError = null;
+        this.jsonMessage = `Valid Json format`;
         this.dataIsValid = true;
         
       } catch (e) {
-        this.jsonError = `Wrong json syntax, error message ${e.message}`
+        this.jsonMessage = `Wrong json syntax, error message: ${e.message}`
         this.dataIsValid = false;
+        toast.error(this.jsonMessage)
 
       } finally {
-        console.log(this.jsonError)
+        console.log(this.jsonMessage)
       }
-
     },
 
     createCardData() {
@@ -98,6 +100,7 @@ export default {
         } else {
           this.cardStore.addCard(this.tempData)
         }
+        toast.success(`Cards created successfully!`)
         this.$emit("create");
         this.$emit("close");
       }

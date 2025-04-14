@@ -32,8 +32,9 @@
 
 
 <script>
-import MoonIcon from '@/assets/Dark_Icon.svg';
-import SunIcon from '@/assets/Light_Icon.svg';
+import MoonIcon from '@/assets/icons/Dark_Icon.svg';
+import SunIcon from '@/assets/icons/Light_Icon.svg';
+
 import { useCardStore } from './stores/card';
 
 export default {
@@ -65,7 +66,7 @@ export default {
   },
   components: {
     MoonIcon,
-    SunIcon
+    SunIcon,
   },
   watch: {
     $route(to) {

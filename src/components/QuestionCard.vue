@@ -77,7 +77,6 @@ export default {
   margin-bottom: 2em;
 }
 
-
 .card {
   width: 50%;
   max-width: 1000px;

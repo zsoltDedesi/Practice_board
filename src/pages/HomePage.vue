@@ -1,52 +1,61 @@
 <template>
-  <div class="btn-container">
-    <button type="button" class="button primary" @click="resetQuestions">Clear all questions</button>
-    <button type="button" class="button primary" @click="showPopup">Add questions</button>
-  </div>
-  <AddNewPopup v-if="isPopupVisible" @close="isPopupVisible = false" />
-  <div>
-    <div v-if="cards.length === 0" class="welcome-text">
-      <h1 class="welcome-title">
-        Welcome to <span class="welcome-highlight">Learning Board!</span>
-      </h1>
-
-      <p class="welcome-subtitle">
-        Sharpen your knowledge with interactive question cards.
-      </p>
-
-      <div class="feature-list">
-        <p>Track your <span>progress</span></p>
-        <p>Test your <span>understanding</span></p>
-        <p>Learn at your <span>own pace</span></p>
-      </div>
-
+  <div ref="scrollContainer" class="home-container">
+    <div class="btn-container">
+      <button type="button" class="button primary" @click="resetQuestions">Clear all questions</button>
+      <button type="button" class="button primary" @click="showPopup">Add questions</button>
     </div>
-    <div v-else class="card-container">
-      <QuestionCard v-for="(card, index) in cards" :key="index" :card="card" :index="index" class="card" />
+    <AddNewPopup v-if="isPopupVisible" @close="isPopupVisible = false" />
+    <div>
+      <div v-if="cards.length === 0" class="welcome-text">
+        <h1 class="welcome-title">
+          Welcome to <span class="welcome-highlight">Learning Board!</span>
+        </h1>
+
+        <p class="welcome-subtitle">
+          Sharpen your knowledge with interactive question cards.
+        </p>
+
+        <div class="feature-list">
+          <p>Track your <span>progress</span></p>
+          <p>Test your <span>understanding</span></p>
+          <p>Learn at your <span>own pace</span></p>
+        </div>
+
+      </div>
+      <div v-else class="card-container">
+        <QuestionCard v-for="(card, index) in cards" :key="index" :card="card" :index="index" class="card" />
+        <ScrollToTop :targetRef="scrollContainer"/>
+      </div>
     </div>
   </div>
 </template>
 
 
 <script>
+import { toast } from '../utils/toast';
 import { useQuizStore } from '../stores/quiz';
 import { useCardStore } from '../stores/card';
+
 import AddNewPopup from '../components/AddNewPopup.vue';
 import QuestionCard from '../components/QuestionCard.vue';
-import { toast } from '../utils/toast';
+import ScrollToTop from '../components/ScrollToTop.vue';
 
 export default {
-  components: { AddNewPopup, QuestionCard },
+  components: { AddNewPopup, QuestionCard, ScrollToTop },
   data() {
     return {
       titleMsg: "Learning Agile",
       isPopupVisible: false,
       cardId: 1,
+      scrollContainer: null,
     };
   },
   created() {
     this.quizStore = useQuizStore()
     this.cardStore = useCardStore()
+  },
+  mounted() {
+    this.scrollContainer = this.$refs.scrollContainer;
   },
 
   methods: {
@@ -58,20 +67,24 @@ export default {
       this.quizStore.resetAnswers();
       this.cardStore.resetAll();
       toast.success(`Your question list is now empty.`)
-    }
+    },
   },
-
   computed: {
     cards() {
       return this.cardStore.cards;
     }
-  }
-
+  },
 };
 </script>
 
 
 <style scoped>
+
+.home-container{
+  height: calc(100vh - 130px);
+  overflow-y: auto;
+}
+
 .welcome-text,
 .btn-container {
   display: flex;
@@ -93,7 +106,7 @@ export default {
   color: var(--color-text-secondary);
   flex-direction: column;
   text-align: center;
-} 
+}
 
 .welcome-title {
   font-size: 2.5rem;
@@ -130,5 +143,4 @@ export default {
   align-items: center;
   gap: 3rem;
 }
-
 </style>

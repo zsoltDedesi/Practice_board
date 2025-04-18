@@ -177,10 +177,10 @@ export default {
   gap: 40px;
 }
 
-.button.secondary:hover {
+/* .button.secondary:hover {
   background-color: var(--color-primary-hover);
   color: white;
-}
+} */
 
 .json-editor-container {
   /* width: 100%; */

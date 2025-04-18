@@ -20,7 +20,6 @@
     display: flex;
     justify-content: center;
     padding: auto;
-    
 }
 
 </style>

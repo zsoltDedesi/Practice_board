@@ -1,6 +1,7 @@
 <template>
   <div ref="scrollContainer" class="home-container">
     <div class="btn-container">
+      <button v-if="cards.length !== 0" type="button" class="button primary left" @click="goToStats">Check answers</button>
       <button type="button" class="button primary" @click="resetQuestions">Clear all questions</button>
       <button type="button" class="button primary" @click="showPopup">Add questions</button>
     </div>
@@ -39,6 +40,7 @@ import { useCardStore } from '../stores/card';
 import AddNewPopup from '../components/AddNewPopup.vue';
 import QuestionCard from '../components/QuestionCard.vue';
 import ScrollToTop from '../components/ScrollToTop.vue';
+import { useRouter } from 'vue-router';
 
 export default {
   components: { AddNewPopup, QuestionCard, ScrollToTop },
@@ -68,6 +70,9 @@ export default {
       this.cardStore.resetAll();
       toast.success(`Your question list is now empty.`)
     },
+    goToStats() {
+      this.$router.push("/statistics");
+    }
   },
   computed: {
     cards() {
@@ -88,24 +93,27 @@ export default {
 .welcome-text,
 .btn-container {
   display: flex;
-  width: 80%;
-  margin: 3rem auto;
   align-items: center;
 }
 
 .btn-container {
   justify-content: end;
+  margin: 3rem;
   gap: 24px;
 }
 
-.btn-container button {
-  height: 3rem;
+.button.left {
+  margin-right: auto;
 }
 
 .welcome-text {
+  justify-content: center;
+
   color: var(--color-text-secondary);
   flex-direction: column;
   text-align: center;
+  /* width: 100%; */
+  min-height: calc(50vh);
 }
 
 .welcome-title {

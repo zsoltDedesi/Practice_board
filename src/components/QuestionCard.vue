@@ -6,7 +6,10 @@
         v-for="(option, index) in card.options" 
         :key="index" 
         :label="option"
+        :isCorrect="option === card.correctAnswer"
+        :isIncorrect="option === card.userAnswer && card.userAnswer !== card.correctAnswer"
         :isSelected="selectedOption === option"
+        :isReadOnly="isReadOnlyState"
         @select="selectOptions"
       />
 
@@ -26,6 +29,7 @@ export default {
   props: {
     card: Object,
     index: Number,
+    isReadOnlyState: false,
   },
 
   // data() {
@@ -78,11 +82,8 @@ export default {
 }
 
 .card {
-  width: 50%;
   max-width: 1000px;
   min-width: 400px;
-  /* margin: auto; */
-  /* padding: ; */
 }
 
 .options-container {
@@ -91,7 +92,7 @@ export default {
   align-items: center;
   flex-wrap: wrap;
   gap: 1.5em;
-  margin: 1em 0;
+  /* margin: 1em 0; */
 }
 
 </style>

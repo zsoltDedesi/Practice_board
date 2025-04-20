@@ -40,7 +40,7 @@ import { useCardStore } from '../stores/card';
 import AddNewPopup from '../components/AddNewPopup.vue';
 import QuestionCard from '../components/QuestionCard.vue';
 import ScrollToTop from '../components/ScrollToTop.vue';
-import { useRouter } from 'vue-router';
+// import { useRouter } from 'vue-router';
 
 export default {
   components: { AddNewPopup, QuestionCard, ScrollToTop },
@@ -108,11 +108,9 @@ export default {
 
 .welcome-text {
   justify-content: center;
-
   color: var(--color-text-secondary);
   flex-direction: column;
   text-align: center;
-  /* width: 100%; */
   min-height: calc(50vh);
 }
 
@@ -151,4 +149,10 @@ export default {
   align-items: center;
   gap: 3rem;
 }
+
+.card {
+  width: 50%;
+}
+
+
 </style>

@@ -6,8 +6,8 @@
         v-for="(option, index) in card.options" 
         :key="index" 
         :label="option"
-        :isCorrect="option === card.correctAnswer"
-        :isIncorrect="option === card.userAnswer && card.userAnswer !== card.correctAnswer"
+        :isCorrect="showAnswerFeedback && option === card.correctAnswer"
+        :isIncorrect="showAnswerFeedback && option === card.userAnswer && card.userAnswer !== card.correctAnswer"
         :isSelected="selectedOption === option"
         :isReadOnly="isReadOnlyState"
         @select="selectOptions"
@@ -30,6 +30,7 @@ export default {
     card: Object,
     index: Number,
     isReadOnlyState: false,
+    showAnswerFeedback: false,
   },
 
   // data() {

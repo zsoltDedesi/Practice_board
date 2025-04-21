@@ -9,10 +9,16 @@
     </div>
     <div v-else class="statistics-body">
       <div class="statistics-info-container">
-        INFO
+        <h1 class="statistics-info-title">Statistics</h1>
+        <div class="statistics-data">
+          <p>Answered cards: <span>{{ quizStore.totalCount }}</span> / {{ cards.length }}</p>
+          <p>Correct answers: <span>{{ quizStore.correctCount }}</span></p>
+          <p>Accuracy: <span>{{ quizStore.scorePercentage }}%</span></p>
+        </div>
       </div>
       <div class="card-container">
-        <QuestionCard v-for="(card, index) in cards" :key="index" :card="card" :index="index" :isReadOnlyState="true" class="card" />
+        <QuestionCard v-for="(card, index) in cards" :key="index" :card="card" :index="index" :isReadOnlyState="true"
+          :showAnswerFeedback="true" class="card" />
       </div>
     </div>
   </div>
@@ -41,10 +47,6 @@ export default {
       return this.cardStore.cards;
     }
   },
-
-
-
-
 }
 
 </script>
@@ -90,6 +92,12 @@ export default {
 }
 
 .statistics-info-container {
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
+
   width: 35%;
   background-color: var(--color-surface);
   margin: 2rem;
@@ -103,7 +111,28 @@ export default {
   border-radius: var(--border-radius);
 }
 
+.statistics-info-title {
+  margin: 8rem;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+}
 
+.statistics-data {
+  text-align: center;
+  font-weight: 600;
+}
 
+.statistics-data p {
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+  color: var(--color-text-secondary);
+
+}
+
+.statistics-data span {
+  color: var(--color-primary);
+  font-weight: 800;
+}
 
 </style>

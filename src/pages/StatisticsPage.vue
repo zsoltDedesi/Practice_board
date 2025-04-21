@@ -1,8 +1,8 @@
 <template>
   <div class="statistics-body-text">
     <div v-if="cards.length === 0" class="empty-state">
-      <h2>Nothing to analyze yet.</h2>
-      <p>Answer some question and track your progress here!</p>
+      <h1 class="statistics-title">Nothing to analyze yet.</h1>
+      <p class="statistics-subtitle">Answer some question and track your progress here!</p>
       <button class="button primary home-btn" @click="$router.push('/')">
         Go to Home
       </button>
@@ -134,5 +134,19 @@ export default {
   color: var(--color-primary);
   font-weight: 800;
 }
+
+.statistics-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+}
+
+.statistics-subtitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin: 1.5rem 0;
+}
+
 
 </style>

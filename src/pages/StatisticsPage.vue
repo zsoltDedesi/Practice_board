@@ -1,6 +1,6 @@
 <template>
-  <div class="statistics-body-text">
-    <div v-if="cards.length === 0" class="empty-state">
+  <div class="statistics-body-container">
+    <div v-if="cards.length === 0" class="statistics-no-data">
       <h1 class="statistics-title">Nothing to analyze yet.</h1>
       <p class="statistics-subtitle">Answer some question and track your progress here!</p>
       <button class="button primary home-btn" @click="$router.push('/')">
@@ -53,11 +53,10 @@ export default {
 
 
 <style scoped>
-.statistics-body-text {
+.statistics-body-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: auto; */
   min-height: calc(90vh);
 }
 
@@ -65,7 +64,7 @@ export default {
   margin: 4rem;
 }
 
-.empty-state {
+.statistics-no-data {
   text-align: center;
 }
 
@@ -73,15 +72,16 @@ export default {
   display: flex;
   flex-direction: row;
   width: 100%;
-  /* height: calc(100vh - 10rem); */
   height: calc(100vh - 100px - 4rem);
   overflow: hidden;
+  gap: 2rem;
+  margin: 2rem 0 2rem 0;
 }
 
 .card-container {
   flex: 1;
   overflow-y: auto;
-  padding: 2rem 2rem 0 0;
+  padding: 0 2rem 0 0;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -92,22 +92,15 @@ export default {
 }
 
 .statistics-info-container {
-  /* text-align: center; */
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
   align-items: center;
 
-  width: 35%;
+  width: 45%;
   background-color: var(--color-surface);
-  margin: 2rem;
-  padding: 2rem;
-  /* height: calc(100vh - 10rem); */
-  height: calc(100vh - 100px - 4rem);
-  /* box-sizing: border-box; */
-  /* position: sticky; */
+  margin: 0 0 0 2rem;
+
   top: 0;
-  /* overflow: hidden; */
   border-radius: var(--border-radius);
 }
 

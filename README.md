@@ -34,7 +34,7 @@ You can run the app with Docker Compose:
     docker-compose up --build
 
 ## Question format (JSON)
-[
+```[
   {
     "question": "What is the capital of France?",
     "options": ["Paris", "Madrid", "Berlin", "Rome"],
@@ -46,4 +46,4 @@ You can run the app with Docker Compose:
     "correctAnswer": "Tokyo"
   },
   next question structure ...
-]
+]```

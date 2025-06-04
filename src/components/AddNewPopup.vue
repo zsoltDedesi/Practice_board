@@ -36,7 +36,7 @@ export default {
   components: { Codemirror },
   data() {
     return {
-      tempData: Object,
+      tempData: null,
       dataIsValid: false,
       statusMessage: '',
       statusType: '',

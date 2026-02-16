@@ -1,0 +1,15 @@
+# Ignore node modules and build output
+# Dependency directory
+node_modules
+# Build output
+dist
+# Local env files
+*.local
+# Logs
+npm-debug.log*
+# Git directory
+.git
+.gitignore
+# Docker related
+Dockerfile
+.dockerignore

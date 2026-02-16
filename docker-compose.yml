@@ -4,9 +4,10 @@ services:
     container_name: learning-board
     build:
       context: .
+      dockerfile: Dockerfile
     image: learning-board:latest
     ports:
-      - "9080:3000"
+      - "9080:80"
     restart: unless-stopped
 
 x-casaos:

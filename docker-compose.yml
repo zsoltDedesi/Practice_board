@@ -2,7 +2,7 @@ name: learning-board
 services:
   learning-board:
     container_name: learning-board
-    image: ghcr.io/zsoltdedesi/learning-board:latest
+    image: ghcr.io/zsoltdedesi/practice_board:latest
     ports:
       - "9080:80"
     restart: unless-stopped

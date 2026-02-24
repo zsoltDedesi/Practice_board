@@ -3,8 +3,8 @@ FROM node:20-alpine AS build-stage
 WORKDIR /app
 
 # Install dependencies first (leverages Docker layer caching)
-COPY package*.json ./
-RUN npm install
+COPY package.json package-lock.json ./
+RUN npm ci
 
 # Copy source code and build
 COPY . .

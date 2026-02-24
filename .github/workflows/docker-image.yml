@@ -2,8 +2,8 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "master" ]
     tags: [ "v*.*.*" ]
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
@@ -41,4 +41,3 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LC }}:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LC }}:${{ github.ref_name }}
-

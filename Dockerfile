@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM node:20-alpine AS build-stage
+FROM node:24-alpine AS build-stage
 WORKDIR /app
 
 # Install dependencies first (leverages Docker layer caching)
